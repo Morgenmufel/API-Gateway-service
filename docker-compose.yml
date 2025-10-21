@@ -1,0 +1,18 @@
+services:
+  jwt-gateway-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api-gateway
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    external: true
