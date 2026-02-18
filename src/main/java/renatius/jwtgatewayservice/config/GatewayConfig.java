@@ -21,6 +21,11 @@ public class GatewayConfig {
                         .and()
                         .method("POST", "GET", "OPTIONS", "PUT")
                         .uri("http://auth-service:8081"))
+                .route("image-content-public", r -> r
+                        .path("/api/images/*/content")
+                        .and()
+                        .method("GET", "OPTIONS")
+                        .uri("http://image-service:8082"))
                 .route("image-service", r -> r
                         .path("/api/**")
                         .and()

@@ -10,7 +10,7 @@ import java.util.List;
 @Configuration
 public class CorsConfig {
 
-    @Value("${FRONTEND_URL}")
+    @Value("${FRONTEND_URL_CORS}")
     private String frontendUrl;
 
     @Bean

@@ -43,7 +43,9 @@ public class AuthFilter implements WebFilter {
         }
 
         String path = exchange.getRequest().getURI().getPath();
-
+        if (path.startsWith("/api/images/") && path.endsWith("/content")) {
+            return chain.filter(exchange);
+        }
         for (String open : WHITELIST) {
             if (path.startsWith(open)) {
                 return chain.filter(exchange);
@@ -64,7 +66,6 @@ public class AuthFilter implements WebFilter {
             String username = jwtUtil.getUsernameFromToken(token);
             exchange = exchange.mutate()
                     .request(builder -> builder
-
                             .header("X-User-Id", userId)
                             .header("X-Username", username)
                     )
